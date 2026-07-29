@@ -8,6 +8,7 @@ const audio = document.getElementById("audio");
 const btn = document.getElementById("btnPlay");
 const reproductor = document.querySelector(".player");
 let invitacionAbierta = false;
+let audioReanudable = false;
 
 
 /*==============================
@@ -20,6 +21,7 @@ boton.addEventListener("click", function(){
 
     // Comenzar música
     audio.play();
+    audioReanudable = true;
 
     // Mostrar reproductor
     reproductor.classList.add("mostrar");
@@ -138,6 +140,7 @@ btn.addEventListener("click", function(){
 
         // Reproducir
         audio.play();
+        audioReanudable = true;
 
         // Cambiar icono
         btn.innerHTML = "❚❚";
@@ -159,6 +162,37 @@ btn.addEventListener("click", function(){
     }
 
 });
+
+function pausarAudioPorBackground() {
+    if (!audioReanudable) return;
+
+    if (!audio.paused) {
+        audio.pause();
+        btn.innerHTML = "▶";
+        reproductor.classList.remove("reproduciendo");
+    }
+}
+
+function reanudarAudioSiCorresponde() {
+    if (!audioReanudable) return;
+
+    if (document.visibilityState === "visible" && audio.paused && invitacionAbierta) {
+        audio.play();
+        btn.innerHTML = "❚❚";
+        reproductor.classList.add("reproduciendo");
+    }
+}
+
+document.addEventListener("visibilitychange", function() {
+    if (document.visibilityState === "hidden") {
+        pausarAudioPorBackground();
+    } else {
+        reanudarAudioSiCorresponde();
+    }
+});
+
+window.addEventListener("blur", pausarAudioPorBackground);
+window.addEventListener("focus", reanudarAudioSiCorresponde);
 /* ===========================
         COPIAR ALIAS
 =========================== */
