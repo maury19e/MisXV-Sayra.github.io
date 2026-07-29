@@ -7,6 +7,7 @@ const botonMapa = document.getElementById("abrir-mapa");
 const audio = document.getElementById("audio");
 const btn = document.getElementById("btnPlay");
 const reproductor = document.querySelector(".player");
+let invitacionAbierta = false;
 
 
 /*==============================
@@ -14,6 +15,8 @@ const reproductor = document.querySelector(".player");
 ==============================*/
 
 boton.addEventListener("click", function(){
+
+    invitacionAbierta = true;
 
     // Comenzar música
     audio.play();
@@ -207,29 +210,23 @@ const seccionRegalo = document.getElementById("seccionRegalo");
 
 function controlarReproductorMovil() {
 
+
     // Solo funciona en celulares
-    if (window.innerWidth > 768) {
-        reproductor.classList.add("mostrar");
-        return;
+    if (window.innerWidth < 768) {
+
+        const posicion = seccionRegalo.getBoundingClientRect().top;
+
+        // Cuando llega a la sección del alias
+        if (posicion <= window.innerHeight * 0.7) {
+
+            reproductor.classList.remove("mostrar");
+
+        } else {
+
+            reproductor.classList.add("mostrar");
+
+        }
     }
-
-    if (!seccionRegalo) {
-        return;
-    }
-
-    const posicion = seccionRegalo.getBoundingClientRect().top;
-
-    // Cuando llega a la sección del alias
-    if (posicion <= window.innerHeight * 0.7) {
-
-        reproductor.classList.remove("mostrar");
-
-    } else {
-
-        reproductor.classList.add("mostrar");
-
-    }
-
 }
 
 window.addEventListener("scroll", controlarReproductorMovil);
