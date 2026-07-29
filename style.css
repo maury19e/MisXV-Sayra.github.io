@@ -98,7 +98,7 @@ body {
 
 section {
     opacity: 0;
-    padding: 50px 10%;
+    padding: 80px 10%;
     transform: translateY(80px);
     transition: 1s;
 }
@@ -739,4 +739,81 @@ footer.cierre {
     footer.cierre {
         padding: 50px 10%;
     }
+}
+/* ===========================
+        DESTELLOS
+=========================== */
+
+.destellos {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9998;
+}
+.destello {
+    position: absolute;
+
+    width: 9px;
+    height: 9px;
+
+    background: #ffffff;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px #ffffff,
+        0 0 18px #e6e6e6,
+        0 0 30px #cfcfcf,
+        0 0 50px rgba(255,255,255,0.9);
+
+    animation: aparecerDestello 2.5s ease-in-out forwards;
+}.destello::before,
+.destello::after {
+    content: "";
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    background: #ffffff;
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 8px #ffffff,
+        0 0 15px #dcdcdc;
+}
+
+.destello::before {
+    width: 3px;
+    height: 28px;
+    transform: translate(-50%, -50%);
+}
+
+.destello::after {
+    width: 28px;
+    height: 3px;
+    transform: translate(-50%, -50%);
+}
+@keyframes aparecerDestello {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    30% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
 }
