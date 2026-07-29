@@ -210,6 +210,10 @@ const seccionRegalo = document.getElementById("seccionRegalo");
 
 function controlarReproductorMovil() {
 
+    if (!invitacionAbierta) {
+        reproductor.classList.remove("mostrar");
+        return;
+    }
 
     // Solo funciona en celulares
     if (window.innerWidth < 768) {
@@ -226,6 +230,8 @@ function controlarReproductorMovil() {
             reproductor.classList.add("mostrar");
 
         }
+    } else {
+        reproductor.classList.add("mostrar");
     }
 }
 
