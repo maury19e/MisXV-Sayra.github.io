@@ -10,7 +10,7 @@ const reproductor = document.querySelector(".player");
 
 
 /*==============================
-        ABRIR  INVITACIÓN
+        ABRIR INVITACIÓN
 ==============================*/
 
 boton.addEventListener("click", function(){
@@ -199,3 +199,40 @@ function crearDestello() {
 }
 
 setInterval(crearDestello, 600);
+/*================================
+   OCULTAR REPRODUCTOR EN CELULAR
+================================*/
+
+const seccionRegalo = document.getElementById("seccionRegalo");
+
+function controlarReproductorMovil() {
+
+    // Solo funciona en celulares
+    if (window.innerWidth > 768) {
+        reproductor.classList.add("mostrar");
+        return;
+    }
+
+    if (!seccionRegalo) {
+        return;
+    }
+
+    const posicion = seccionRegalo.getBoundingClientRect().top;
+
+    // Cuando llega a la sección del alias
+    if (posicion <= window.innerHeight * 0.7) {
+
+        reproductor.classList.remove("mostrar");
+
+    } else {
+
+        reproductor.classList.add("mostrar");
+
+    }
+
+}
+
+window.addEventListener("scroll", controlarReproductorMovil);
+window.addEventListener("resize", controlarReproductorMovil);
+
+controlarReproductorMovil();
