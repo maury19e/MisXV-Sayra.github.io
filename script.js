@@ -171,3 +171,31 @@ copiarAlias.addEventListener("click", function(){
     mensajeCopia.innerHTML = "Alias copiado ✓";
 
 });
+/* ===========================
+        DESTELLOS
+=========================== */
+
+const contenedorDestellos = document.querySelector(".destellos");
+
+function crearDestello() {
+
+    const destello = document.createElement("span");
+
+    destello.classList.add("destello");
+
+    destello.style.left = Math.random() * 100 + "%";
+    destello.style.top = Math.random() * 100 + "%";
+
+    const tamaño = Math.random() * 4 + 3;
+
+    destello.style.width = tamaño + "px";
+    destello.style.height = tamaño + "px";
+
+    contenedorDestellos.appendChild(destello);
+
+    setTimeout(function() {
+        destello.remove();
+    }, 2500);
+}
+
+setInterval(crearDestello, 600);
