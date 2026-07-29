@@ -10,7 +10,7 @@ const reproductor = document.querySelector(".player");
 
 
 /*==============================
-        ABRIR INVITACIÓN
+        ABRIR  INVITACIÓN
 ==============================*/
 
 boton.addEventListener("click", function(){
